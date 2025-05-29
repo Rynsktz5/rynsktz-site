@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>rynsktz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #121212;
+      --text: #fff;
+      --card: #1f1f1f;
+      --accent: crimson;
+    }
+    [data-theme="light"] {
+      --bg: #f1f1f1;
+      --text: #121212;
+      --card: #fff;
+      --accent: #007bff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.4s ease;
+    }
+
+    .container {
+      max-width: 500px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      margin-top: 1rem;
+      font-size: 2rem;
+    }
+
+    .bio {
+      font-size: 1rem;
+      color: var(--text);
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    .links a {
+      display: block;
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      padding: 1rem;
+      margin: 0.8rem 0;
+      border-radius: 30px;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .links a:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--card);
+      color: var(--text);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      opacity: 0.5;
+    }
+
+    .caution {
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-align: center;
+      margin-top: 2rem;
+      padding: 0 1rem;
+      max-width: 400px;
+      line-height: 1.4;
+    }
+
+    /* 18+ badge style */
+    .badge-18plus {
+      background-color: #ff4444;
+      color: white;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      border-radius: 12px;
+      margin-left: 8px;
+      vertical-align: middle;
+      user-select: none;
+    }
+
+    /* Tooltip container */
+    .tooltip {
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* Tooltip text */
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 160px;
+      background-color: var(--accent);
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 6px;
+      position: absolute;
+      z-index: 10;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -80px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.75rem;
+      pointer-events: none;
+    }
+
+    /* Tooltip arrow */
+    .tooltip .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%; /* At the bottom of the tooltip */
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--accent) transparent transparent transparent;
+    }
+
+    /* Show tooltip on hover */
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 100;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-content {
+      background-color: var(--card);
+      margin: 15% auto;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 400px;
+      color: var(--text);
+      text-align: center;
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .modal-buttons {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .modal-buttons button {
+      background-color: var(--accent);
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 25px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .modal-buttons button:hover {
+      background-color: crimson;
+    }
+
+    .modal-buttons .cancel {
+      background-color: #555;
+    }
+
+    .modal-buttons .cancel:hover {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <button class="toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+  <div class="container">
+    <img src="me2.png" alt="profile" class="profile-pic" />
+    <h1>rynsktz</h1>
+    <div class="bio">Artist | fanArts | digital</div>
+
+    <div class="links">
+      <a href="https://www.instagram.com/rynsktx?igsh=MWRzZHg2MWJkMDQ2cw==">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://youtube.com/@rynskt5?si=ZdGhEGlVq_duXrEw">
+        <i class="fab fa-youtube"></i> YouTube
+      </a>
+      <a href="https://www.threads.net/@rynsktx">
+        <i class="fas fa-comment-dots"></i> Threads
+      </a>
+      <a href="#" class="patreon-link tooltip" onclick="openNSFWModal(event)" aria-label="Patreon link with NSFW warning">
+        <i class="fab fa-patreon"></i> Patreon
+        <span class="badge-18plus">18+</span>
+        <span class="tooltiptext">Exclusive adult content</span>
+      </a>
+    </div>
+
+    <div class="caution">
+      ⚠️ Some linked content is intended for audiences 18+ only. Viewer discretion is advised.
+    </div>
+
+  </div>
+
+  <footer>© 2025 rynsktz</footer>
+
+  <!-- NSFW Modal -->
+  <div id="nsfwModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+    <div class="modal-content">
+      <h2 id="modalTitle">Warning: 18+ Content</h2>
+      <p id="modalDesc">The Patreon page contains adult content intended only for viewers 18 years or older. By proceeding, you confirm that you are of legal age to view this content.</p>
+      <div class="modal-buttons">
+        <button id="proceedBtn">Proceed</button>
+        <button class="cancel" id="cancelBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      body.setAttribute("data-theme", newTheme);
+    }
+
+    const patreonUrl = "https://www.patreon.com/Noir8?utm_campaign=creatorshare_creator";
+    const nsfwModal = document.getElementById("nsfwModal");
+    const proceedBtn = document.getElementById("proceedBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const patreonLink = document.querySelector(".patreon-link");
+
+    function openNSFWModal(event) {
+      event.preventDefault();
+      nsfwModal.style.display = "block";
+    }
+
+    proceedBtn.addEventListener("click", () => {
+      nsfwModal.style.display = "none";
+      window.open(patreonUrl, "_blank");
+    });
+
+    cancelBtn.addEventListener("click", () => {
+      nsfwModal.style.display = "none";
+    });
+
+    // Close modal if clicking outside modal content
+    window.onclick = function(event) {
+      if (event.target === nsfwModal) {
+        nsfwModal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+</html>

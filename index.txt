@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>rynsktz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #121212;
+      --text: #fff;
+      --card: #1f1f1f;
+      --accent: #e91e63;
+    }
+    [data-theme="light"] {
+      --bg: #f1f1f1;
+      --text: #121212;
+      --card: #fff;
+      --accent: #007bff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.4s ease;
+    }
+
+    .container {
+      max-width: 500px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      margin-top: 1rem;
+      font-size: 2rem;
+    }
+
+    .bio {
+      font-size: 1rem;
+      color: var(--text);
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    .links a {
+      display: block;
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      padding: 1rem;
+      margin: 0.8rem 0;
+      border-radius: 30px;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .links a:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--card);
+      color: var(--text);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <button class="toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+  <div class="container">
+    <img src="me2.png" alt="profile" class="profile-pic" />
+    <h1>rynsktz</h1>
+    <div class="bio">Artist | fanArts | digital</div>
+
+    <div class="links">
+      <a href="https://www.instagram.com/rynsktx?igsh=MWRzZHg2MWJkMDQ2cw==">Instagram</a>
+      <a href="https://www.patreon.com/Noir8?utm_campaign=creatorshare_creator">Patreon</a>
+      <a href="https://youtube.com/@rynskt5?si=ZdGhEGlVq_duXrEw">YouTube</a>
+      <a href="https://www.threads.net/@rynsktx">Threads</a>
+    </div>
+  </div>
+
+  <footer>© 2025 rynsktz</footer>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      body.setAttribute("data-theme", newTheme);
+    }
+  </script>
+</body>
+</html>
